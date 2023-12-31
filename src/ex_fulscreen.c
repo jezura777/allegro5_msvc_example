@@ -24,6 +24,8 @@ int main()
     if(!al_install_audio()) { printf("[INIT_ERROR]: Couldn't install audio!\n"); return -1;} else { printf("[INIT]: Initialized audio.\n");}
     if(!al_init_primitives_addon()) { printf("[INIT_ERROR]: Couldn't initilize primitives addon\n"); return -1;} else { printf("[INIT]: Initialized primitives addon.\n");}
 
+    al_set_new_display_flags(ALLEGRO_FULLSCREEN_WINDOW);
+
     ALLEGRO_TIMER* timer = al_create_timer(1.0 / FPS); if(!timer) { printf("[INIT_ERROR]: Couldn't create timer!\n"); return -1;} else{ printf("[INIT]: Created timer.\n");}
     ALLEGRO_EVENT_QUEUE* event_queue = al_create_event_queue(); if(!event_queue) { printf("[INIT_ERROR]: Couldn't create event queue!\n"); return -1;} else{ printf("[INIT]: Created event queue.\n");}
     ALLEGRO_DISPLAY* display = al_create_display(WIDTH, HEIGHT); if(!display) { printf("[INIT_ERROR]: Couldn't create display!\n"); return -1;} else{ printf("[INIT]: Created display.\n");}
@@ -59,6 +61,10 @@ int main()
 
             case ALLEGRO_EVENT_KEY_UP:
                 key[event.keyboard.keycode] &= KEY_RELEASED;
+                break;
+
+            case ALLEGRO_EVENT_DISPLAY_RESIZE:
+                al_acknowledge_resize(display);
                 break;
 
             case ALLEGRO_EVENT_DISPLAY_CLOSE:
