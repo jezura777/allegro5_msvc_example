@@ -98,5 +98,6 @@ void update(unsigned char key[ALLEGRO_KEY_MAX])
 void draw() 
 {
     // What to draw on the screen.
+    al_clear_to_color(al_map_rgb(0, 255, 0));
     return;
 }
